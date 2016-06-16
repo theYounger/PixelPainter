@@ -1,3 +1,4 @@
+
 function PixelPainter(width, height) {
   var pixelPainter = document.getElementById('pixelPainter');
   var ppCanvas = document.createElement('div');
@@ -15,3 +16,6 @@ function PixelPainter(width, height) {
     $blockContainer.append(newBlock);
   }
 }
+
+console.log('hi tyler');
+
