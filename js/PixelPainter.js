@@ -36,11 +36,9 @@ function PixelPainter() {
   };
   colorPallete.appendChild(colorRandomizer);
 
-
   var blockContainer = document.createElement('div');
   blockContainer.setAttribute('class', 'blocks');
   canvas.appendChild(blockContainer);
-
 
   var colorArray = ['red', 'pink', 'magenta', 'violet', 'blue', 'teal', 'cyan', 'lightgreen', 'green', 'yellow', 'gold', 'orange'];
 
@@ -59,7 +57,20 @@ function PixelPainter() {
     newBlock.setAttribute('class', 'block');
     newBlock.setAttribute('id', 'block' + i);
     newBlock.addEventListener('mousemove', colorBlock);
-    newBlock.onclick = function() { this.style.backgroundColor = colorChoice; };
+    newBlock.addEventListener('click', function() { this.style.backgroundColor = colorChoice; });
+    // newBlock.addEventListener('mouseover', function() { hover kind of works, breaks others
+    //   if(this.style.backgroundColor !== 'white') {
+    //     this.style.backgroundColor = colorChoice;
+    //     x = true;
+    //   }
+    // });
+    // newBlock.addEventListener('mouseout', function() {
+    //   if(x) {
+    //     this.style.backgroundColor = 'white';
+    //     x = false;
+    //   }
+    // });
+
     blockContainer.appendChild(newBlock);
   }
 }
