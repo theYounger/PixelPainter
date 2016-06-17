@@ -13,6 +13,13 @@ function PixelPainter() {
   pixelPainter.appendChild(sidebar);
   pixelPainter.appendChild(canvas);
 
+  var clear = document.createElement('input');
+  clear.type = 'button';
+  clear.id = 'clear';
+  clear.value = 'Clear';
+  clear.addEventListener('click',clearEm);
+  sidebar.appendChild(clear);
+
   var colorPallete = document.createElement('div');
   colorPallete.id = 'colorPallete';
   sidebar.appendChild(colorPallete);
@@ -58,13 +65,17 @@ function PixelPainter() {
     newBlock.setAttribute('id', 'block' + i);
     newBlock.addEventListener('mousemove', colorBlock);
     newBlock.addEventListener('click', function() { this.style.backgroundColor = colorChoice; });
-    newBlock.addEventListener('mouseover', function() {
-      if(this.style.backgroundColor !== 'white') {
-        this.style.backgroundColor = colorChoice;
-      }
-    });
+    // newBlock.addEventListener('mouseover', function() { hover kind of works, breaks others
+    //   if(this.style.backgroundColor !== 'white') {
+    //     this.style.backgroundColor = colorChoice;
+    //     x = true;
+    //   }
+    // });
     // newBlock.addEventListener('mouseout', function() {
-    //   if(this)
+    //   if(x) {
+    //     this.style.backgroundColor = 'white';
+    //     x = false;
+    //   }
     // });
 
     blockContainer.appendChild(newBlock);
@@ -80,6 +91,11 @@ function colorPicker() {
   colorChoice = this.id;
   colorPreview.style.backgroundColor = colorChoice;
 }
-
+function clearEm() {
+  for(var i = 0; i < 400; i ++) {
+    document.getElementById('block' + i).style.backgroundColor = 'white';
+  }
+}
 
 PixelPainter();
+
