@@ -2,11 +2,30 @@
   background-color:purple;
   height:600px;
   width:600px;
-  margin-left:auto;
-  margin-right:auto;
+  display: inline-block;
+}
+
+#colorPallete {
+  background-color: yellow;
+  height: 100px;
+  width: 100px;
+}
+
+.pallete {
+  height: 8%;
+  width: 8%;
+}
+
+#sidebar {
+  background-color: pink;
+  height:600px;
+  width:250px;
+  display: inline-block;
+
 }
 
 .block {
+  position:relative;
   height:5%;
   width:5%;
   display:inline-block;
