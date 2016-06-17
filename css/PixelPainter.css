@@ -1,6 +1,16 @@
-#pixelPainter {
-  height: 50%;
-  width: 50%;
 
-  background-color: red;
+#canvas {
+  background-color: purple;
+  height: 600px;
+  width: 600px;
+}
+
+.block {
+  height: 5%;
+  width: 5%;
+  display: inline-block;
+}
+
+.block:hover {
+  background-color: red; func
 }
