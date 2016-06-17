@@ -2,14 +2,19 @@ var mouseDown = false;
 document.body.onmousedown = function() { mouseDown = true; };
 document.body.onmouseup = function() {mouseDown = false; };
 var colorChoice = 'black';
+// var x = false;
 
 
-function PixelPainter() {
+function PixelPainter(height, width) {
   var pixelPainter = document.getElementById('pixelPainter');
   var canvas = document.createElement('div');
   var sidebar = document.createElement('div');
   canvas.id = 'canvas';
+  canvas.style.height = height + 'px';
+  canvas.style.width = width + 'px';
   sidebar.id = 'sidebar';
+  sidebar.style.height = height + 'px';
+  sidebar.style.width = width / 2 + 'px';
   pixelPainter.appendChild(sidebar);
   pixelPainter.appendChild(canvas);
 
@@ -54,7 +59,7 @@ function PixelPainter() {
     newPallete.setAttribute('class', 'pallete');
     newPallete.setAttribute('id', colorArray[i]);
     newPallete.style.backgroundColor = colorArray[i];
-    newPallete.addEventListener('click', colorPicker);
+    newPallete.onclick, colorPicker;
     newPallete.addEventListener('mouseover', colorPicker);
     colorPallete.appendChild(newPallete);
   }
@@ -64,15 +69,15 @@ function PixelPainter() {
     newBlock.setAttribute('class', 'block');
     newBlock.setAttribute('id', 'block' + i);
     newBlock.addEventListener('mousemove', colorBlock);
-    newBlock.addEventListener('click', function() { this.style.backgroundColor = colorChoice; });
-    // newBlock.addEventListener('mouseover', function() { hover kind of works, breaks others
-    //   if(this.style.backgroundColor !== 'white') {
+    newBlock.onclick = function() { this.style.backgroundColor = colorChoice; };
+    // newBlock.addEventListener('mouseenter', function() {
+    //   if(this.style.backgroundColor === 'white') {
     //     this.style.backgroundColor = colorChoice;
     //     x = true;
     //   }
     // });
     // newBlock.addEventListener('mouseout', function() {
-    //   if(x) {
+    //   if(x === true) {
     //     this.style.backgroundColor = 'white';
     //     x = false;
     //   }
@@ -97,5 +102,5 @@ function clearEm() {
   }
 }
 
-PixelPainter();
+PixelPainter(600,600);
 

@@ -1,21 +1,20 @@
+h1 {
+
+}
 #canvas {
   background-color: white;
-  height:600px;
-  width:600px;
   display:inline-block;
   border:solid;
 }
 #sidebar {
   background-color: pink;
-  height:600px;
-  width:250px;
   display: inline-block;
 }
 
 #colorPallete {
   background-color: black;
-  height: 200px;
-  width: 250px;
+  height: 70%;
+  width: 70%;
 }
 .pallete {
   height: 8.33%;
@@ -30,7 +29,6 @@
 }
 #colorRandomizer {
   float:right;
-
 }
 .block {
   position:relative;
@@ -41,4 +39,5 @@
 .block:hover {
   background-color: yellow;
 }
+
 
