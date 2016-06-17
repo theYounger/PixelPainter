@@ -1,8 +1,9 @@
 #canvas {
-  background-color: #ffffe6;
+  background-color: white;
   height:600px;
   width:600px;
   display:inline-block;
+  border:solid;
 }
 #sidebar {
   background-color: pink;
