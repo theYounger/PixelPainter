@@ -1,27 +1,33 @@
-
 #canvas {
-  background-color:purple;
+  background-color: #ffffe6;
   height:600px;
   width:600px;
-  display: inline-block;
+  display:inline-block;
+  border: solid;
 }
 
 #colorPallete {
   background-color: black;
-  height: 100px;
+  height: 200px;
+  width: 250px;
+}
+#colorPreview {
+  background-color:green;
+  height:100px;
   width: 100px;
+  float:right;
 }
 
 .pallete {
-  height: 15%;
-  width: 15%;
+  height: 8.33%;
+  width: 8.33%;
 }
 
 #sidebar {
   background-color: pink;
   height:600px;
   width:250px;
-
+  display: inline-block;
 }
 
 .block {
