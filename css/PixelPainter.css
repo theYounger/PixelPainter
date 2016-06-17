@@ -4,24 +4,6 @@
   width:600px;
   display:inline-block;
 }
-
-#colorPallete {
-  background-color: black;
-  height: 200px;
-  width: 250px;
-}
-#colorPreview {
-  background-color:green;
-  height:100px;
-  width: 100px;
-  float:right;
-}
-
-.pallete {
-  height: 8.33%;
-  width: 8.33%;
-}
-
 #sidebar {
   background-color: pink;
   height:600px;
@@ -29,6 +11,26 @@
   display: inline-block;
 }
 
+#colorPallete {
+  background-color: black;
+  height: 200px;
+  width: 250px;
+}
+.pallete {
+  height: 8.33%;
+  width: 8.33%;
+}
+#colorPreview {
+  background-color:green;
+  height:50px;
+  width: 50px;
+  float:right;
+  border-style:groove;
+}
+#colorRandomizer {
+  float:right;
+
+}
 .block {
   position:relative;
   height:5%;
@@ -36,4 +38,6 @@
   display:inline-block;
 }
 .block:hover {
-  background-color:red;
+  background-color: yellow;
+}
+
