@@ -17,6 +17,10 @@ function PixelPainter() {
   colorPallete.id = 'colorPallete';
   sidebar.appendChild(colorPallete);
 
+  var colorPreview = document.createElement('div');
+  colorPreview.id = 'colorPreview';
+  colorPallete.appendChild(colorPreview);
+
   var blockContainer = document.createElement('div');
   blockContainer.setAttribute('class', 'blocks');
   canvas.appendChild(blockContainer);
@@ -38,6 +42,7 @@ function PixelPainter() {
     newBlock.setAttribute('class', 'block');
     newBlock.setAttribute('id', 'block' + i);
     newBlock.addEventListener('mousemove', colorBlock);
+    newBlock.addEventListener('click', colorBlockClick);
     blockContainer.appendChild(newBlock);
   }
 }
@@ -47,9 +52,14 @@ function colorBlock() {
     this.style.backgroundColor = colorChoice;
   }
 }
+function colorBlockClick() {
+  this.style.backgroundColor = colorChoice;
+}
 
 function colorPicker() {
   colorChoice = this.id;
+  colorPreview.style.backgroundColor = colorChoice;
+
 }
 
 PixelPainter();
