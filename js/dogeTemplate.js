@@ -72,5 +72,3 @@ function dogeTemplate() {
   document.getElementById('block395').style.backgroundColor = 'black';
 
 }
-
-doge

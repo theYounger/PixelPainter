@@ -2,16 +2,30 @@ var mouseDown = false;
 document.body.onmousedown = function() { mouseDown = true; };
 document.body.onmouseup = function() {mouseDown = false; };
 var colorChoice = 'black';
+// var x = false;
+var eraser = false;
 
 
-function PixelPainter() {
+function PixelPainter(height, width) {
   var pixelPainter = document.getElementById('pixelPainter');
   var canvas = document.createElement('div');
   var sidebar = document.createElement('div');
   canvas.id = 'canvas';
+  canvas.style.height = height + 'px';
+  canvas.style.width = width + 'px';
   sidebar.id = 'sidebar';
+  sidebar.style.height = height + 'px';
+  sidebar.style.width = width / 2 + 'px';
   pixelPainter.appendChild(sidebar);
   pixelPainter.appendChild(canvas);
+
+  var clear = document.createElement('input');
+  clear.type = 'button';
+  clear.id = 'clear';
+  clear.value = 'Clear';
+  clear.addEventListener('click',clearEm);
+  sidebar.appendChild(clear);
+
 
   var colorPallete = document.createElement('div');
   colorPallete.id = 'colorPallete';
@@ -25,6 +39,7 @@ function PixelPainter() {
   colorRandomizer.type = 'button';
   colorRandomizer.id = 'colorRandomizer';
   colorRandomizer.value = 'Randomize';
+
   colorRandomizer.onclick = function() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -34,11 +49,42 @@ function PixelPainter() {
     colorChoice = color;
     colorPreview.style.backgroundColor = colorChoice;
   };
+
   colorPallete.appendChild(colorRandomizer);
+
+  var colorBlack = document.createElement('div');
+  colorBlack.id = 'black';
+  colorBlack.addEventListener('mouseover', colorPicker);
+  colorPallete.appendChild(colorBlack);
+
+
+  var colorWhite = document.createElement('div');
+  colorWhite.id = 'white';
+  colorWhite.addEventListener('mouseover', colorPicker);
+  // colorWhite.style.marginTop = height/2;
+  // colorWhite.style.marginLeft = width/8;
+  colorPallete.appendChild(colorWhite);
+
+  var eraser1 = document.createElement('div');
+  var eraser2 = document.createElement('div');
+  eraser1.id = 'eraser1';
+  eraser1.onclick = function() {
+    colorChoice = 'white';
+  };
+  eraser2.id = 'eraser2';
+  eraser2.onclick = function() {
+    colorPreview.style.backgroundImage = 'url(http://icons.iconarchive.com/icons/designcontest/outline/48/Eraser-icon.png)';
+    colorPreview.style.backgroundColor = 'white';
+    colorChoice = 'white';
+    eraser = true;
+  };
+  sidebar.appendChild(eraser1);
+  sidebar.appendChild(eraser2);
 
   var blockContainer = document.createElement('div');
   blockContainer.setAttribute('class', 'blocks');
   canvas.appendChild(blockContainer);
+
 
   var colorArray = ['red', 'pink', 'magenta', 'violet', 'blue', 'teal', 'cyan', 'lightgreen', 'green', 'yellow', 'gold', 'orange'];
 
@@ -47,7 +93,7 @@ function PixelPainter() {
     newPallete.setAttribute('class', 'pallete');
     newPallete.setAttribute('id', colorArray[i]);
     newPallete.style.backgroundColor = colorArray[i];
-    newPallete.addEventListener('click', colorPicker);
+    newPallete.onclick = colorPicker;
     newPallete.addEventListener('mouseover', colorPicker);
     colorPallete.appendChild(newPallete);
   }
@@ -57,19 +103,45 @@ function PixelPainter() {
     newBlock.setAttribute('class', 'block');
     newBlock.setAttribute('id', 'block' + i);
     newBlock.addEventListener('mousemove', colorBlock);
-    newBlock.addEventListener('click', function() { this.style.backgroundColor = colorChoice; });
-    // newBlock.addEventListener('mouseover', function() { hover kind of works, breaks others
-    //   if(this.style.backgroundColor !== 'white') {
+
+    newBlock.onclick = function() { this.style.backgroundColor = colorChoice; };
+    // newBlock.addEventListener('mouseenter', function() {
+    //   if(this.style.backgroundColor === 'white') {
+
     //     this.style.backgroundColor = colorChoice;
     //     x = true;
     //   }
     // });
     // newBlock.addEventListener('mouseout', function() {
-    //   if(x) {
+    //   if(x === true) {
     //     this.style.backgroundColor = 'white';
     //     x = false;
     //   }
     // });
+    newBlock.addEventListener('click', function() {
+      if(eraser === true) {
+        var currentBlock = this.id;
+        currentBlock = Number(currentBlock.replace(/\D/g,''));
+        var blockNums = [currentBlock,currentBlock + 20,currentBlock -20];
+        while(blockNums.length > 0) {
+          var current = blockNums[0];
+          var left = Number(blockNums[0]) - 1;
+          var right = blockNums[0] + 1;
+
+          var currentId = 'block' + current;
+          var leftId = 'block' + left.toString();
+          var rightId = 'block' + right;
+
+          var first = document.getElementById(leftId);
+          var second = document.getElementById(currentId);
+          var third = document.getElementById(rightId);
+          first.style.backgroundColor = 'white';
+          second.style.backgroundColor = 'white';
+          third.style.backgroundColor = 'white';
+          blockNums.shift();
+        }
+      }
+    });
 
     blockContainer.appendChild(newBlock);
   }
@@ -82,144 +154,24 @@ function colorBlock() {
 }
 function colorPicker() {
   colorChoice = this.id;
+  colorPreview.style.backgroundImage = '';
   colorPreview.style.backgroundColor = colorChoice;
+  eraser = false;
+}
+function clearEm() {
+  for(var i = 0; i < 400; i ++) {
+    document.getElementById('block' + i).style.backgroundColor = 'white';
+  }
+}
+
+PixelPainter(600,600);
+
+var dogeArray = [25,34,45,46,53,54,64,67,72,74,84,88,89,90,91,92,94,104,106,114,124,135,144,155,163,176,183,192,193,196,203,208,209,212,216,222,228,237,242,253,254,255,257,262,274, 277,283,289,297,303,310,311,312,313,317,323,337,343,344,356,364,375,384,385,386,387,388,389,390,391,392,393,394];
+
+function templateSet(array) {
+  for(var i = 0; i < array.length; i++) {
+    document.getElementById('block' + array[i]).style.backgroundColor = colorChoice;
+  }
 }
 
 
-PixelPainter();
-
-var dogeArray = [35,46,47,54,55,65,68,73,75,85,89,90,91,92,93,95105
-115
-125
-136
-145
-156
-164
-177
-184
-193
-194
-197
-204
-209
-210
-217
-223
-229
-238
-243
-254
-255
-258
-263
-275
-284
-298
-304
-311
-312
-313
-314
-318
-324
-338
-344
-345
-357
-364
-365
-376
-384
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395]
-
-function dogeTemplate() {
-
-
-
-  for(var i = 0; i < dogeArray.length; i++)
-
-  document.getElementById('block35').style.backgroundColor = 'black';
-  document.getElementById('block46').style.backgroundColor = 'black';
-  document.getElementById('block47').style.backgroundColor = 'black';
-  document.getElementById('block54').style.backgroundColor = 'black';
-  document.getElementById('block55').style.backgroundColor = 'black';
-  document.getElementById('block65').style.backgroundColor = 'black';
-  document.getElementById('block68').style.backgroundColor = 'black';
-  document.getElementById('block73').style.backgroundColor = 'black';
-  document.getElementById('block75').style.backgroundColor = 'black';
-  document.getElementById('block85').style.backgroundColor = 'black';
-  document.getElementById('block89').style.backgroundColor = 'black';
-  document.getElementById('block90').style.backgroundColor = 'black';
-  document.getElementById('block91').style.backgroundColor = 'black';
-  document.getElementById('block92').style.backgroundColor = 'black';
-  document.getElementById('block93').style.backgroundColor = 'black';
-  document.getElementById('block95').style.backgroundColor = 'black';
-  document.getElementById('block105').style.backgroundColor = 'black';
-  document.getElementById('block115').style.backgroundColor = 'black';
-  document.getElementById('block125').style.backgroundColor = 'black';
-  document.getElementById('block136').style.backgroundColor = 'black';
-  document.getElementById('block145').style.backgroundColor = 'black';
-  document.getElementById('block156').style.backgroundColor = 'black';
-  document.getElementById('block164').style.backgroundColor = 'black';
-  document.getElementById('block177').style.backgroundColor = 'black';
-  document.getElementById('block184').style.backgroundColor = 'black';
-  document.getElementById('block193').style.backgroundColor = 'black';
-  document.getElementById('block194').style.backgroundColor = 'black';
-  document.getElementById('block197').style.backgroundColor = 'black';
-  document.getElementById('block204').style.backgroundColor = 'black';
-  document.getElementById('block209').style.backgroundColor = 'black';
-  document.getElementById('block210').style.backgroundColor = 'black';
-  document.getElementById('block217').style.backgroundColor = 'black';
-  document.getElementById('block223').style.backgroundColor = 'black';
-  document.getElementById('block229').style.backgroundColor = 'black';
-  document.getElementById('block238').style.backgroundColor = 'black';
-  document.getElementById('block243').style.backgroundColor = 'black';
-  document.getElementById('block254').style.backgroundColor = 'black';
-  document.getElementById('block255').style.backgroundColor = 'black';
-  document.getElementById('block258').style.backgroundColor = 'black';
-  document.getElementById('block263').style.backgroundColor = 'black';
-  document.getElementById('block275').style.backgroundColor = 'black';
-  document.getElementById('block284').style.backgroundColor = 'black';
-  document.getElementById('block298').style.backgroundColor = 'black';
-  document.getElementById('block304').style.backgroundColor = 'black';
-  document.getElementById('block311').style.backgroundColor = 'black';
-  document.getElementById('block312').style.backgroundColor = 'black';
-  document.getElementById('block313').style.backgroundColor = 'black';
-  document.getElementById('block314').style.backgroundColor = 'black';
-  document.getElementById('block318').style.backgroundColor = 'black';
-  document.getElementById('block324').style.backgroundColor = 'black';
-  document.getElementById('block338').style.backgroundColor = 'black';
-  document.getElementById('block344').style.backgroundColor = 'black';
-  document.getElementById('block345').style.backgroundColor = 'black';
-  document.getElementById('block357').style.backgroundColor = 'black';
-  document.getElementById('block364').style.backgroundColor = 'black';
-  document.getElementById('block365').style.backgroundColor = 'black';
-  document.getElementById('block376').style.backgroundColor = 'black';
-  document.getElementById('block384').style.backgroundColor = 'black';
-  document.getElementById('block384').style.backgroundColor = 'black';
-  document.getElementById('block385').style.backgroundColor = 'black';
-  document.getElementById('block386').style.backgroundColor = 'black';
-  document.getElementById('block387').style.backgroundColor = 'black';
-  document.getElementById('block388').style.backgroundColor = 'black';
-  document.getElementById('block389').style.backgroundColor = 'black';
-  document.getElementById('block390').style.backgroundColor = 'black';
-  document.getElementById('block391').style.backgroundColor = 'black';
-  document.getElementById('block392').style.backgroundColor = 'black';
-  document.getElementById('block393').style.backgroundColor = 'black';
-  document.getElementById('block394').style.backgroundColor = 'black';
-  document.getElementById('block395').style.backgroundColor = 'black';
-
-}
-
-dogeTemplate();
