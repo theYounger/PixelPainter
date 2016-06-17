@@ -21,6 +21,22 @@ function PixelPainter() {
   colorPreview.id = 'colorPreview';
   colorPallete.appendChild(colorPreview);
 
+  var colorRandomizer = document.createElement('input');
+  colorRandomizer.type = 'button';
+  colorRandomizer.id = 'colorRandomizer';
+  colorRandomizer.value = 'Randomize';
+  colorRandomizer.onclick = function() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    colorChoice = color;
+    colorPreview.style.backgroundColor = colorChoice;
+  };
+  colorPallete.appendChild(colorRandomizer);
+
+
   var blockContainer = document.createElement('div');
   blockContainer.setAttribute('class', 'blocks');
   canvas.appendChild(blockContainer);
@@ -34,6 +50,7 @@ function PixelPainter() {
     newPallete.setAttribute('id', colorArray[i]);
     newPallete.style.backgroundColor = colorArray[i];
     newPallete.addEventListener('click', colorPicker);
+    newPallete.addEventListener('mouseover', colorPicker);
     colorPallete.appendChild(newPallete);
   }
 
@@ -42,7 +59,7 @@ function PixelPainter() {
     newBlock.setAttribute('class', 'block');
     newBlock.setAttribute('id', 'block' + i);
     newBlock.addEventListener('mousemove', colorBlock);
-    newBlock.addEventListener('click', colorBlockClick);
+    newBlock.onclick = function() { this.style.backgroundColor = colorChoice; };
     blockContainer.appendChild(newBlock);
   }
 }
@@ -52,14 +69,10 @@ function colorBlock() {
     this.style.backgroundColor = colorChoice;
   }
 }
-function colorBlockClick() {
-  this.style.backgroundColor = colorChoice;
-}
-
 function colorPicker() {
   colorChoice = this.id;
   colorPreview.style.backgroundColor = colorChoice;
-
 }
+
 
 PixelPainter();
