@@ -1,3 +1,7 @@
+var mouseDown = false;
+document.body.onmousedown = function() { mouseDown = true; };
+document.body.onmouseup = function() {mouseDown = false; };
+
 function PixelPainter() {
   var pixelPainter = document.getElementById('pixelPainter');
   var canvas = document.createElement('div');
@@ -12,14 +16,18 @@ function PixelPainter() {
     var newBlock = document.createElement('div');
     newBlock.setAttribute('class', 'block');
     newBlock.setAttribute('id', 'block' + i);
-    newBlock.addEventListener('click', colorBlock);
+    newBlock.addEventListener('mousemove', colorBlock);
     blockContainer.appendChild(newBlock);
   }
 }
 
 function colorBlock() {
-  console.log(this);
-  this.style.backgroundColor = 'red';
+  console.log(mouseDown);
+  if(mouseDown === true) {
+    this.style.backgroundColor = 'red';
+  }
 }
+
+
 
 PixelPainter();
