@@ -1,36 +1,58 @@
+h1 {
+  text-align: center;
+  display: none;
+}
+
+#pixelPainter {
+  margin: auto;
+  width: 50%;
+  display: block;
+
+}
 
 #canvas {
   background-color: white;
   display:inline-block;
   border:solid;
-  float:left;
+  margin: auto;
 }
 #sidebar {
-  background-color: pink;
-  margin-top: 0px;
+  background-color: lightgrey;
 }
 
 #colorPallete {
-  height: 70%;
-  width: 70%;
-  margin: auto;
+  height: 50px;
+  margin: 2px;
 }
 .pallete {
-  height: 8.33%;
+  display: inline-block;
+  height: 100%;
   width: 8.33%;
 }
+#buttonBox {
+  text-align: center;
+  margin: 20px 0;
+}
+#buttonBox div,
+#buttonBox input
+{
+  display: inline-block;
+  margin-right: 20px;
+}
 #black {
-  height: 17%;
-  width: 35%;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  float: right;
   background-color: black;
+  margin: auto;
+  vertical-align: 20px;
 }
 #white {
-  height: 17%;
-  width: 35%;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   background-color: white;
+  vertical-align: 20px;
 }
 
 #eraser1 {
@@ -43,15 +65,19 @@
   height: 46px;
   width: 46px;
 }
+
 #colorPreview {
   background-color:green;
-  height:50px;
-  width: 50px;
-  float:right;
+  height:60px;
+  width: 60px;
   border-style:groove;
+  margin-bottom: 10px;
+  float: right;
 }
 #colorRandomizer {
-  margin-left: 0px;
+  vertical-align: 20px;
+  height: 30px;
+  width: 80px;
 }
 .block {
   position:relative;
@@ -60,4 +86,11 @@
 }
 .block:hover {
   background-color: yellow;
+}
+
+#clear {
+  vertical-align: 20px;
+  display: inline-block;
+  height: 30px;
+  width: 60px;
 }

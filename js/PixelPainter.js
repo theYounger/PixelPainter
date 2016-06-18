@@ -6,6 +6,9 @@ var colorChoice = 'black';
 var eraser = false;
 
 
+/*-------------------------++FUNCTION++------------------------------
++++++++++++++++++++++++++--PIXEL PAINTER--+++++++++++++++++++++++++++
+-------------------------+++++++++++++++++---------------------------*/
 function PixelPainter(height, width) {
   var pixelPainter = document.getElementById('pixelPainter');
   var canvas = document.createElement('div');
@@ -15,36 +18,53 @@ function PixelPainter(height, width) {
   canvas.style.height = height;
   canvas.style.width = width;
   sidebar.id = 'sidebar';
-
-  //============sidebar styling===========
-  sidebar.style.height = height / 3.8;
   sidebar.style.width = width;
-  //======================================
-
   pixelPainter.appendChild(sidebar);
   pixelPainter.appendChild(canvas);
 
-  var clear = document.createElement('input');
-  clear.type = 'button';
-  clear.id = 'clear';
-  clear.value = 'Clear';
-  clear.addEventListener('click',clearEm);
-  sidebar.appendChild(clear);
 
-
+/*=====================================================
+=====================Color Pallete=====================
+=====================================================*/
   var colorPallete = document.createElement('div');
   colorPallete.id = 'colorPallete';
   sidebar.appendChild(colorPallete);
 
-  var colorPreview = document.createElement('div');
-  colorPreview.id = 'colorPreview';
-  colorPallete.appendChild(colorPreview);
 
+/*=====================================================
+=======================Button Box=====================
+=====================================================*/
+var buttonBox = document.createElement('div');
+buttonBox.id = 'buttonBox';
+sidebar.appendChild(buttonBox);
+
+/*=====================================================
+=====================Color Black======================
+=====================================================*/
+  var colorBlack = document.createElement('div');
+  colorBlack.id = 'black';
+  colorBlack.addEventListener('mouseover', colorPicker);
+  buttonBox.appendChild(colorBlack);
+
+
+/*=====================================================
+===================Color Randomizer====================
+=====================================================*/
+  var colorWhite = document.createElement('div');
+  colorWhite.id = 'white';
+  colorWhite.addEventListener('mouseover', colorPicker);
+  // colorWhite.style.marginTop = height/2;
+  // colorWhite.style.marginLeft = width/8;
+  buttonBox.appendChild(colorWhite);
+
+
+/*=====================================================
+===================Color Randomizer====================
+=====================================================*/
   var colorRandomizer = document.createElement('input');
   colorRandomizer.type = 'button';
   colorRandomizer.id = 'colorRandomizer';
   colorRandomizer.value = 'Randomize';
-
   colorRandomizer.onclick = function() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -54,27 +74,27 @@ function PixelPainter(height, width) {
     colorChoice = color;
     colorPreview.style.backgroundColor = colorChoice;
   };
-
-  colorPallete.appendChild(colorRandomizer);
-
-  var colorBlack = document.createElement('div');
-  colorBlack.id = 'black';
-  colorBlack.addEventListener('mouseover', colorPicker);
-  colorPallete.appendChild(colorBlack);
+  buttonBox.appendChild(colorRandomizer);
 
 
-  var colorWhite = document.createElement('div');
-  colorWhite.id = 'white';
-  colorWhite.addEventListener('mouseover', colorPicker);
-  // colorWhite.style.marginTop = height/2;
-  // colorWhite.style.marginLeft = width/8;
-  colorPallete.appendChild(colorWhite);
+/*=====================================================
+=====================Clear Button=====================
+=====================================================*/
+  var clear = document.createElement('input');
+  clear.type = 'button';
+  clear.id = 'clear';
+  clear.value = 'Clear';
+  clear.addEventListener('click',clearEm);
+  buttonBox.appendChild(clear);
 
+
+/*=====================================================
+=====================Eraser Buttons====================
+=====================================================*/
   var eraser1 = document.createElement('div');
   var eraser2 = document.createElement('div');
   eraser1.id = 'eraser1';
   eraser1.onclick = function() {
-
     colorPreview.style.backgroundImage = 'url(http://icons.iconarchive.com/icons/designcontest/outline/48/Eraser-icon.png)';
     colorChoice = 'white';
   };
@@ -85,14 +105,29 @@ function PixelPainter(height, width) {
     colorChoice = 'white';
     eraser = true;
   };
-  sidebar.appendChild(eraser1);
-  sidebar.appendChild(eraser2);
+  buttonBox.appendChild(eraser1);
+  buttonBox.appendChild(eraser2);
 
+
+/*=====================================================
+====================Color Preview======================
+=====================================================*/
+  var colorPreview = document.createElement('div');
+  colorPreview.id = 'colorPreview';
+  buttonBox.appendChild(colorPreview);
+
+
+/*=====================================================
+=====================Block Container===================
+=====================================================*/
   var blockContainer = document.createElement('div');
   blockContainer.setAttribute('class', 'blocks');
   canvas.appendChild(blockContainer);
 
 
+/*=====================================================
+======================Color Pallete====================
+=====================================================*/
   var colorArray = ['red', 'pink', 'magenta', 'violet', 'blue', 'teal', 'cyan', 'lightgreen', 'green', 'yellow', 'gold', 'orange'];
 
   for (var i = 0; i < colorArray.length; i++) {
