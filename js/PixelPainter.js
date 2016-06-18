@@ -97,9 +97,21 @@ function colorPicker() {
   colorPreview.style.backgroundColor = colorChoice;
 }
 function clearEm() {
-  for(var i = 0; i < 400; i ++) {
+  for(var i = 0; i < 400; i++) {
     document.getElementById('block' + i).style.backgroundColor = 'white';
   }
+}
+function partyTime() {
+  setInterval(function() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    var randomNumber = Math.floor((Math.random() * 401));
+    var randomBlock = 'block' + randomNumber;
+    document.getElementById(randomBlock).style.backgroundColor = color;
+    }, 1);
 }
 
 PixelPainter(600,600);
