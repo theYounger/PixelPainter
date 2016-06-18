@@ -14,17 +14,11 @@ function PixelPainter(height, width) {
   canvas.style.height = height;
   canvas.style.width = width;
   sidebar.id = 'sidebar';
-  sidebar.style.height = height;
-  sidebar.style.width = width / 3.8;
+  sidebar.style.height = height / 8;
+  sidebar.style.width = width;
   pixelPainter.appendChild(sidebar);
   pixelPainter.appendChild(canvas);
 
-  var clear = document.createElement('input');
-  clear.type = 'button';
-  clear.id = 'clear';
-  clear.value = 'Clear';
-  clear.addEventListener('click',clearEm);
-  sidebar.appendChild(clear);
 
 
   var colorPallete = document.createElement('div');
@@ -33,7 +27,7 @@ function PixelPainter(height, width) {
 
   var colorPreview = document.createElement('div');
   colorPreview.id = 'colorPreview';
-  colorPallete.appendChild(colorPreview);
+  sidebar.appendChild(colorPreview);
 
   var colorRandomizer = document.createElement('input');
   colorRandomizer.type = 'button';
@@ -50,12 +44,12 @@ function PixelPainter(height, width) {
     colorPreview.style.backgroundColor = colorChoice;
   };
 
-  colorPallete.appendChild(colorRandomizer);
+  sidebar.appendChild(colorRandomizer);
 
   var colorBlack = document.createElement('div');
   colorBlack.id = 'black';
   colorBlack.addEventListener('mouseover', colorPicker);
-  colorPallete.appendChild(colorBlack);
+  sidebar.appendChild(colorBlack);
 
 
   var colorWhite = document.createElement('div');
@@ -63,7 +57,7 @@ function PixelPainter(height, width) {
   colorWhite.addEventListener('mouseover', colorPicker);
   // colorWhite.style.marginTop = height/2;
   // colorWhite.style.marginLeft = width/8;
-  colorPallete.appendChild(colorWhite);
+  sidebar.appendChild(colorWhite);
 
   var eraser1 = document.createElement('div');
   var eraser2 = document.createElement('div');
@@ -81,6 +75,13 @@ function PixelPainter(height, width) {
   };
   sidebar.appendChild(eraser1);
   sidebar.appendChild(eraser2);
+
+  var clear = document.createElement('input');
+  clear.type = 'button';
+  clear.id = 'clear';
+  clear.value = 'Clear';
+  clear.addEventListener('click',clearEm);
+  sidebar.appendChild(clear);
 
   var blockContainer = document.createElement('div');
   blockContainer.setAttribute('class', 'blocks');
