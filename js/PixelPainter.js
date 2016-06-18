@@ -39,6 +39,24 @@ buttonBox.id = 'buttonBox';
 sidebar.appendChild(buttonBox);
 
 /*=====================================================
+=======================Party Button=====================
+=====================================================*/
+var partyButton = document.createElement('input');
+partyButton.type = 'button';
+partyButton.id = 'partyButton';
+partyButton.onclick = partyTime;
+partyButton.value = '◕_◕';
+buttonBox.appendChild(partyButton);
+
+/*=====================================================
+=======================Templates Button=====================
+=====================================================*/
+var templateButton = document.createElement('input');
+templateButton.type = 'button';
+templateButton.id = 'templateButton';
+//to be added
+
+/*=====================================================
 =====================Color Black======================
 =====================================================*/
   var colorBlack = document.createElement('div');
@@ -66,6 +84,7 @@ sidebar.appendChild(buttonBox);
   colorRandomizer.id = 'colorRandomizer';
   colorRandomizer.value = 'Randomize';
   colorRandomizer.onclick = function() {
+    colorPreview.style.backgroundImage = '';
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
