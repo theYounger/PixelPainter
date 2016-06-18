@@ -1,18 +1,16 @@
-h1 {
-
-}
 #canvas {
   background-color: white;
   display:inline-block;
   border:solid;
+  float:left;
 }
 #sidebar {
   background-color: pink;
   display: inline-block;
+  float:right;
 }
 
 #colorPallete {
-  background-color: black;
   height: 70%;
   width: 70%;
 }
@@ -20,10 +18,34 @@ h1 {
   height: 8.33%;
   width: 8.33%;
 }
+#black {
+  height: 17%;
+  width: 35%;
+  border-radius: 50%;
+  float: right;
+  background-color: black;
+}
+#white {
+  height: 17%;
+  width: 35%;
+  border-radius: 50%;
+  background-color: white;
+}
+
+#eraser1 {
+  background-image: url("http://icons.iconarchive.com/icons/designcontest/outline/32/Eraser-icon.png");
+  height: 32px;
+  width: 32px;
+}
+#eraser2 {
+  background-image: url("http://icons.iconarchive.com/icons/designcontest/outline/48/Eraser-icon.png");
+  height: 46px;
+  width: 46px;
+}
 #colorPreview {
   background-color:green;
-  height:17%;
-  width: 34%;
+  height:50px;
+  width: 50px;
   float:right;
   border-style:groove;
 }
@@ -32,12 +54,9 @@ h1 {
 }
 .block {
   position:relative;
-  height:5%;
-  width:5%;
   display:inline-block;
+
 }
 .block:hover {
   background-color: yellow;
 }
-
-
