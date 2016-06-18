@@ -10,6 +10,7 @@ function PixelPainter(height, width) {
   var pixelPainter = document.getElementById('pixelPainter');
   var canvas = document.createElement('div');
   var sidebar = document.createElement('div');
+
   canvas.id = 'canvas';
   canvas.style.height = height + 'px';
   canvas.style.width = width + 'px';
@@ -173,5 +174,3 @@ function templateSet(array) {
     document.getElementById('block' + array[i]).style.backgroundColor = colorChoice;
   }
 }
-
-
